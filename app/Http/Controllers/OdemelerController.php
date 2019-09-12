@@ -8,16 +8,27 @@ class OdemelerController extends Controller
 {
       public function getUser(Request $request)
       {
+                try {
 
+                   $data = $request->validate([
+                       'userID' => 'required',
+                       'tutar' => 'required',
+                       'tarih' => 'required',
+                   ]);
 
-          $Odemeler= new Odemeler([
-            'userID'=> $request->get('user'),
-            'tutar' => $request->get('tutar'),
-            'tarih'=> $request->get('tarih'),
+                  Odemeler::create($request->all());
+                   return response()->json([
+                       'success' => true
+                       'message' => 'Ödeme eklendi'
+                   ]);
 
-          ]);
-          $odemeler->save();
-           return 'Hello World';
+                } catch (Exception $e) {
+
+                   return response()->json([
+                       'success' => false
+                       'message' => 'Ödeme eklenemedi: '. $e->getMessage()
+                    ]);
+                }
 
 
       }

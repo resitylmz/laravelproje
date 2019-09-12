@@ -88,6 +88,7 @@
               </div>
               <div class="modal-body">
                       <form>
+                        {!! csrf_field() !!}
                         <div class="form-group hidden">
 
                             <input type="text" class="form-control" id="csrf" value="{{Session::token()}}" >
@@ -137,13 +138,10 @@
                       tarih: tarih
                     },
                     cache: false,
-                  success:function(data){
-                        alert(data);
+                  success:function(response){
+                        alert(response.message);
                   },
-                  error: function(data) {
-                      alert(data);
 
-                    }
               });
           }else{
             alert("Lütfen boş bırakmayınız.");
