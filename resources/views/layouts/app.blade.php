@@ -91,7 +91,7 @@
         $(document).ready( function () {
               $('#myTable').DataTable();
         } );
-        $("#tarihh").datepicker({
+        $("#tarih").datepicker({
             format: 'dd-mm-yyyy',
             language:"tr"
         });

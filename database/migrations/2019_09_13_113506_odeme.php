@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Odemeler extends Migration
+class Odeme extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class Odemeler extends Migration
      */
     public function up()
     {
-      Schema::create('odeme', function (Blueprint $table) {
-          $table->increments('id');
-          $table->string('userID');
-          $table->string('tutar');
-          $table->string('tarih');
-          $table->rememberToken();
-          $table->timestamps();
-      });
+        Schema::create('monay', function (Blueprint $table) {
+              $table->increments('id');
+              $table->integer('userID');
+              $table->string('tutar');
+              $table->string('tarih');
+            //  $table->timestamps();
+        });
     }
 
     /**

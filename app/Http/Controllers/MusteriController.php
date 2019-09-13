@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Session;
 use Illuminate\Http\Request;
-use  App\Http\Models\Odemeler;
+
 use  App\Http\Models\User;
 use Input;
 class MusteriController extends Controller
@@ -61,20 +61,7 @@ class MusteriController extends Controller
 
       return redirect(musteri)->with('success','Müşteri Başarılı Şekilde Kayıt edildi.');
     }
-    public function getUser(Request $request)
-    {
-
-
-                $Odemeler=new Odemeler([
-                  'userID'=>$request->get('user'),
-                  'tutar'=>$request->get('tutar'),
-                  'tarih'=>$request->get('tarih'),
-                ]);
-                $Odemeler->save();
-                return response()->json(["success"=>"Got Simple Ajax Request."]);
-
-    }
-
+  
     /**
      * Display the specified resource.
      *
@@ -86,6 +73,7 @@ class MusteriController extends Controller
          $musteri = User::find($id);
         return view("musteri.show")->with('musteri',$musteri);
     }
+
 
     /**
      * Show the form for editing the specified resource.

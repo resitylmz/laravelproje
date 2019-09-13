@@ -67,7 +67,25 @@
                             </div>
                             <h2>Ödeme Bilgileri</h2>
                         <div class="col-md-12">
+                          <table>
+                            <thead>
+                                 <tr>
+                                   <td>Ödenen  Tutar </td>
+                                   <td> Ödeme  Tarihi </td>
+                                 </tr>
+                            </thead>
+                            <tbody>
+                              @foreach ($odeme as $key => $vt):
 
+
+                               <tr>
+                                   <td>{{$vt->tutar}} </td>
+                                   <td> {{$vt->tarih}} </td>
+                               </tr>
+                                @endforeach;
+
+                            </tbody>
+                          </table>
 
 
                         </div>
@@ -88,11 +106,7 @@
               </div>
               <div class="modal-body">
                       <form>
-                        {!! csrf_field() !!}
-                        <div class="form-group hidden">
 
-                            <input type="text" class="form-control" id="csrf" value="{{Session::token()}}" >
-                        </div>
                           <div class="form-group">
                               <label for="exampleInputEmail1">Total Monay</label>
                               <input type="text" class="form-control" id="tutar"  placeholder="Monay ADD ">
@@ -103,7 +117,7 @@
                           </div>
                           <div class="form-group">
                               <label for="exampleInputPassword1">Tarih</label>
-                             <input type="text" class="form-control" id="tarihh" data-toggle="datepicker">
+                             <input type="text" class="form-control" id="tarih" data-toggle="datepicker">
                           </div>
                           <button type="submit" class="btn btn-primary" id="butsave">Kaydet</button>
                       </form>
@@ -117,29 +131,29 @@
         </div>
         <script type="text/javascript">
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+
             $('#butsave').click(function() {
 
-            var user = $("#userID").val();
-            var tarih = $("#tarihh").val();
+            var userID = $("#userID").val();
+            var tarih = $("#tarih").val();
             var tutar = $("#tutar").val();
-          if( (user !="")  && (tarih !="") && (user !="")){
+            //var token = $('#_token').val();
+          if( (userID !="")  && (tarih !="") && (tutar !="")){
 
               $.ajax({
                   type:'POST',
                   url:"/getUser",
                   data: {
-                      user : user,
+                     _token: "{{ csrf_token() }}",
+                      userID : userID,
                       tutar: tutar,
-                      tarih: tarih
+                      tarih: tarih,
                     },
                     cache: false,
                   success:function(response){
+                      console.log(response.message);
                         alert(response.message);
+
                   },
 
               });

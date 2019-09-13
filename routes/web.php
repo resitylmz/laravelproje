@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function()
    Route::post('/store', 'MusteriController@store');
    Route::post('/update', 'MusteriController@update');
    Route::post('/destroy', 'MusteriController@destroy');
-   Route::post('/getUser','OdemelerController@getUser');
-
+   Route::post('/getUser','OdemelerController@postUser');
+      Route::post('Musteri/{id}','OdemelerController@odemeListe');
 });
 Auth::routes();
